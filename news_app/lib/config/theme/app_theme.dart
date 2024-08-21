@@ -62,13 +62,13 @@ class LightModeTheme extends AppTheme {
   @override
   Color get alternate => const Color(0xFFE0E3E7);
   @override
-  Color get primaryText => const Color(0xFF1A1A1A);
+  Color get primaryText => const Color(0xFF333647);
   @override
   Color get secondaryText => const Color(0xFF2ABAFF);
   @override
   Color get tertiaryText => const Color(0xFF999999);
   @override
-  Color get primaryBackground => const Color(0xFFEDEDED);
+  Color get primaryBackground => const Color(0xFFFFFFFF);
   @override
   LinearGradient get primaryBackgroundGradient => const LinearGradient(
         begin: Alignment.topCenter,
@@ -84,7 +84,7 @@ class LightModeTheme extends AppTheme {
   @override
   Color get secondaryBackground => const Color(0xFF475AD7);
   @override
-  Color get accent1 => const Color(0xFF9E9E9E);
+  Color get accent1 => const Color(0xFFF3F4F6);
   @override
   Color get accent2 => const Color(0xFF808080);
   @override
