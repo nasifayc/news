@@ -15,6 +15,7 @@ abstract class AppTheme {
   late Color alternate;
   late Color primaryText;
   late Color secondaryText;
+  late Color tertiaryText;
   late Color primaryBackground;
   late Color secondaryBackground;
 
@@ -53,19 +54,21 @@ class LightModeTheme extends AppTheme {
   @override
   Brightness get brightness => Brightness.light;
   @override
-  Color get primary => const Color(0xFF003068);
+  Color get primary => const Color(0xFFEDEDED);
   @override
-  Color get secondary => const Color(0xFFFFFFFF);
+  Color get secondary => const Color(0xFF475AD7);
   @override
-  Color get tertiary => const Color(0xFF80B8F1);
+  Color get tertiary => const Color(0xFF2ABAFF);
   @override
   Color get alternate => const Color(0xFFE0E3E7);
   @override
-  Color get primaryText => const Color(0xFFFFFFFF);
+  Color get primaryText => const Color(0xFF1A1A1A);
   @override
-  Color get secondaryText => const Color(0xFF003068);
+  Color get secondaryText => const Color(0xFF2ABAFF);
   @override
-  Color get primaryBackground => const Color(0xAA465B6F);
+  Color get tertiaryText => const Color(0xFF999999);
+  @override
+  Color get primaryBackground => const Color(0xFFEDEDED);
   @override
   LinearGradient get primaryBackgroundGradient => const LinearGradient(
         begin: Alignment.topCenter,
@@ -79,7 +82,7 @@ class LightModeTheme extends AppTheme {
       );
 
   @override
-  Color get secondaryBackground => const Color(0xFFFFFFFF);
+  Color get secondaryBackground => const Color(0xFF475AD7);
   @override
   Color get accent1 => const Color(0xFF9E9E9E);
   @override
