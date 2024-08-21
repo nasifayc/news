@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/config/theme/app_theme.dart';
-import 'package:news_app/widgets/authentication/sign_in_form.dart';
+import 'package:news_app/widgets/authentication/sign_up_form.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = AppTheme.of(context);
@@ -22,7 +22,7 @@ class _SignInScreenState extends State<SignInScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Sign In',
+                'Sign Up',
                 style: theme.typography.headlineLarge,
               ),
               const SizedBox(
@@ -35,7 +35,7 @@ class _SignInScreenState extends State<SignInScreen> {
               const SizedBox(
                 height: 30,
               ),
-              const SignInForm()
+              const SignUpForm()
             ],
           ),
         ),

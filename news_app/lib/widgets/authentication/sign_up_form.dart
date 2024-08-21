@@ -2,25 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:news_app/config/theme/app_theme.dart';
 import 'package:news_app/widgets/common/custome_form_fields.dart';
 import 'package:news_app/widgets/common/primary_button.dart';
-import 'package:news_app/widgets/common/secondary_button.dart';
 
-class SignInForm extends StatefulWidget {
-  const SignInForm({super.key});
+class SignUpForm extends StatefulWidget {
+  const SignUpForm({super.key});
 
   @override
-  State<SignInForm> createState() => _SignInFormState();
+  State<SignUpForm> createState() => _SignUpFormState();
 }
 
-class _SignInFormState extends State<SignInForm> {
+class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
+    _usernameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
   }
 
   @override
@@ -32,6 +36,20 @@ class _SignInFormState extends State<SignInForm> {
       key: _formKey,
       child: Column(
         children: [
+          formComponents.buildNormalTextField(
+            _usernameController,
+            Text(
+              "Username",
+              style: theme.typography.labelLarge2,
+            ),
+            prefixIcon: Image.asset(
+              "assets/images/user.png",
+              color: theme.accent2,
+              height: 22,
+              width: 22,
+            ),
+          ),
+          const SizedBox(height: 15),
           formComponents.buildNormalTextField(
             _emailController,
             Text(
@@ -59,79 +77,29 @@ class _SignInFormState extends State<SignInForm> {
               width: 22,
             ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          GestureDetector(
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                'Forgot Password?',
-                style: theme.typography.labelMedium2,
-              ),
+          const SizedBox(height: 15),
+          formComponents.buildPasswordField(
+            _confirmPasswordController,
+            Text(
+              "Confirm",
+              style: theme.typography.labelLarge2,
+            ),
+            prefixIcon: Image.asset(
+              "assets/images/lock.png",
+              color: theme.accent2,
+              height: 22,
+              width: 22,
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 10,
           ),
           PrimaryButton(
               onPressed: null,
               child: Text(
-                'Sign In',
+                'Sign Up',
                 style: theme.typography.labelLarge,
               )),
-          const SizedBox(
-            height: 30,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                color: theme.accent2,
-                height: 1,
-                width: MediaQuery.of(context).size.width * 0.4,
-              ),
-              Text(
-                'or',
-                style: theme.typography.labelMedium2,
-              ),
-              Container(
-                color: theme.accent2,
-                height: 1,
-                width: MediaQuery.of(context).size.width * 0.4,
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          SecondaryButton(
-            onPressed: null,
-            prefix: Image.asset(
-              "assets/images/google.png",
-              height: 20,
-              width: 20,
-            ),
-            child: Text(
-              'Sign in with Google',
-              style: theme.typography.displaySmall,
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          SecondaryButton(
-            onPressed: null,
-            prefix: Image.asset(
-              "assets/images/facebook.png",
-              height: 20,
-              width: 20,
-            ),
-            child: Text(
-              'Sign in with Facebook',
-              style: theme.typography.displaySmall,
-            ),
-          ),
           const SizedBox(
             height: 40,
           ),
@@ -139,16 +107,18 @@ class _SignInFormState extends State<SignInForm> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Don't have an account?",
+                "Have an account?",
                 style: theme.typography.labelMedium2,
               ),
               const SizedBox(
                 width: 5,
               ),
               GestureDetector(
-                onTap: null,
+                onTap: () {
+                  Navigator.pushReplacementNamed(context, '/sign_in');
+                },
                 child: Text(
-                  "Sign Up",
+                  "Sign In",
                   style: theme.typography.headlineSmall,
                 ),
               )
