@@ -8,7 +8,9 @@ abstract class AppTypography {
   TextStyle get displaySmall;
   TextStyle get headlineLarge;
   TextStyle get headlineMedium;
+  TextStyle get headlineMedium2;
   TextStyle get headlineSmall;
+  TextStyle get headlineSmall2;
   TextStyle get titleLarge;
   TextStyle get titleMedium;
   TextStyle get titleMedium2;
@@ -16,6 +18,9 @@ abstract class AppTypography {
   TextStyle get labelLarge;
   TextStyle get labelMedium;
   TextStyle get labelSmall;
+  TextStyle get labelLarge2;
+  TextStyle get labelMedium2;
+  TextStyle get labelSmall2;
   TextStyle get bodyLargeWhite;
   TextStyle get bodyMediumWhite;
   TextStyle get bodySmallWhite;
@@ -33,21 +38,21 @@ class ThemeTypography extends AppTypography {
         fontFamily: fontFamily,
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
-        fontSize: 64,
+        fontSize: 32,
       );
   @override
   TextStyle get displayMedium => TextStyle(
         fontFamily: fontFamily,
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
-        fontSize: 44,
+        fontSize: 24,
       );
   @override
   TextStyle get displaySmall => TextStyle(
         fontFamily: fontFamily,
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 36,
+        fontSize: 18,
       );
   @override
   TextStyle get headlineLarge => TextStyle(
@@ -64,11 +69,25 @@ class ThemeTypography extends AppTypography {
         fontSize: 24,
       );
   @override
-  TextStyle get headlineSmall => TextStyle(
+  TextStyle get headlineMedium2 => TextStyle(
         fontFamily: fontFamily,
         color: theme.primaryText.withOpacity(0.7),
         fontWeight: FontWeight.normal,
-        fontSize: 20,
+        fontSize: 18,
+      );
+  @override
+  TextStyle get headlineSmall => TextStyle(
+        fontFamily: fontFamily,
+        color: theme.primaryText,
+        fontWeight: FontWeight.bold,
+        fontSize: 16,
+      );
+  @override
+  TextStyle get headlineSmall2 => TextStyle(
+        fontFamily: fontFamily,
+        color: theme.primaryText.withOpacity(0.7),
+        fontWeight: FontWeight.normal,
+        fontSize: 16,
       );
   @override
   TextStyle get titleLarge => TextStyle(
@@ -118,6 +137,28 @@ class ThemeTypography extends AppTypography {
         fontFamily: fontFamily,
         color: theme.primary,
         fontWeight: FontWeight.bold,
+        fontSize: 14,
+      );
+  @override
+  TextStyle get labelLarge2 => TextStyle(
+        fontFamily: fontFamily,
+        color: theme.accent2,
+        fontWeight: FontWeight.normal,
+        fontSize: 18,
+      );
+  @override
+  TextStyle get labelMedium2 => TextStyle(
+      fontFamily: fontFamily,
+      color: theme.accent2,
+      fontWeight: FontWeight.normal,
+      fontSize: 16,
+      overflow: TextOverflow.ellipsis);
+
+  @override
+  TextStyle get labelSmall2 => TextStyle(
+        fontFamily: fontFamily,
+        color: theme.accent2,
+        fontWeight: FontWeight.normal,
         fontSize: 14,
       );
   @override

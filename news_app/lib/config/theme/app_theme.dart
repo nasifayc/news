@@ -86,7 +86,7 @@ class LightModeTheme extends AppTheme {
   @override
   Color get accent1 => const Color(0xFFF3F4F6);
   @override
-  Color get accent2 => const Color(0xFF808080);
+  Color get accent2 => const Color(0xFF999999);
   @override
   Color get accent3 => const Color(0xFFF4F2EE);
   @override
@@ -125,5 +125,5 @@ class LightModeTheme extends AppTheme {
   @override
   Color get textButtonColor => const Color(0xFF003068);
   @override
-  Color get inputFieldBackground => const Color(0xFF003068).withOpacity(0.32);
+  Color get inputFieldBackground => const Color(0xFFF9FCFE);
 }

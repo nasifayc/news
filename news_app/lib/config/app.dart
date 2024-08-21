@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/config/theme/app_theme.dart';
+import 'package:news_app/screens/layouts/sign_in_screen.dart';
 import 'package:news_app/screens/onboarding_screen.dart';
 
 class App extends StatefulWidget {
@@ -15,6 +16,9 @@ class _AppState extends State<App> {
     return MaterialApp(
       title: 'News',
       theme: LightModeTheme().themeData,
+      routes: {
+        '/sign_in': (context) => const SignInScreen(),
+      },
       home: const OnboardingScreen(),
     );
   }
