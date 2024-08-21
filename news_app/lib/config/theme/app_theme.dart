@@ -43,20 +43,9 @@ abstract class AppTheme {
   late Color inputFieldBorder;
   late Color inputFieldBackground;
   late Color textButtonColor;
-  late Color cardRed;
-  late Color cardBlue;
-  late Color cardPurple;
   late Color appBarColor;
 
-  late Color cardBrown;
-  late Color cardGreen;
-  late Color cardDark;
-  late Color cardDay;
-  late Color cardDayParts;
-  late Color cardHour;
-  late Color cardLevel;
   AppTypography get typography => ThemeTypography(this);
-
   ThemeData get themeData => ThemeDataFactory.toThemeData(this);
 }
 
@@ -88,11 +77,6 @@ class LightModeTheme extends AppTheme {
           Color(0xFFFFFFFF), Color(0xFFFFFFFF)
         ],
       );
-  @override
-  Color get cardBrown => const Color(0xFF603D3D);
-
-  @override
-  Color get cardGreen => const Color(0xFF599377);
 
   @override
   Color get secondaryBackground => const Color(0xFFFFFFFF);
@@ -139,22 +123,4 @@ class LightModeTheme extends AppTheme {
   Color get textButtonColor => const Color(0xFF003068);
   @override
   Color get inputFieldBackground => const Color(0xFF003068).withOpacity(0.32);
-  @override
-  Color get cardRed => const Color(0xFF935959);
-  @override
-  Color get cardBlue => const Color(0xFF092749);
-  @override
-  Color get cardPurple => const Color(0XFF3F3D56);
-  @override
-  Color get appBarColor => const Color(0XFF092749);
-  @override
-  Color get cardDark => const Color(0XAA000000);
-  @override
-  Color get cardDay => const Color.fromRGBO(89, 147, 119, 0.35);
-  @override
-  Color get cardDayParts => const Color.fromRGBO(147, 89, 89, 0.42);
-  @override
-  Color get cardHour => const Color.fromRGBO(255, 111, 97, 0.57);
-  @override
-  Color get cardLevel => const Color.fromRGBO(0, 0, 0, 0.62);
 }
