@@ -8,6 +8,7 @@ class NewsModel extends Equatable {
   final DateTime createdDate;
   final String imageUrl;
   final String location;
+  final String author;
 
   const NewsModel(
       {required this.id,
@@ -16,7 +17,8 @@ class NewsModel extends Equatable {
       required this.description,
       required this.createdDate,
       required this.imageUrl,
-      required this.location});
+      required this.location,
+      required this.author});
 
   Map<String, dynamic> toJson() {
     return {
@@ -26,7 +28,8 @@ class NewsModel extends Equatable {
       'description': description,
       'createdDate': createdDate.toIso8601String(),
       'imageUrl': imageUrl,
-      'location': location
+      'location': location,
+      'author': author
     };
   }
 
@@ -39,6 +42,7 @@ class NewsModel extends Equatable {
       createdDate: DateTime.parse(json['createdDate']),
       imageUrl: json['imageUrl'],
       location: json['location'],
+      author: json['author'],
     );
   }
 
@@ -51,5 +55,6 @@ class NewsModel extends Equatable {
         createdDate,
         imageUrl,
         location,
+        author,
       ];
 }

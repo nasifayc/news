@@ -10,6 +10,10 @@ final class AuthenticationInitial extends AuthenticationState {}
 
 final class Authenticating extends AuthenticationState {}
 
+final class AuthenticatingGoogle extends AuthenticationState {}
+
+final class AuthenticatingFacebook extends AuthenticationState {}
+
 final class Authenticated extends AuthenticationState {
   final UserModel user;
   Authenticated({required this.user});

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/config/theme/app_theme.dart';
+import 'package:news_app/controllers/authentication/authentication_cubit.dart';
+import 'package:news_app/controllers/authentication/authentication_state.dart';
 import 'package:news_app/widgets/common/custome_form_fields.dart';
 import 'package:news_app/widgets/common/primary_button.dart';
 import 'package:news_app/widgets/common/secondary_button.dart';
@@ -44,6 +47,12 @@ class _SignInFormState extends State<SignInForm> {
               height: 22,
               width: 22,
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Email is required!';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 15),
           formComponents.buildPasswordField(
@@ -58,6 +67,12 @@ class _SignInFormState extends State<SignInForm> {
               height: 22,
               width: 22,
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Passwors is required!';
+              }
+              return null;
+            },
           ),
           const SizedBox(
             height: 10,
@@ -74,12 +89,25 @@ class _SignInFormState extends State<SignInForm> {
           const SizedBox(
             height: 30,
           ),
-          PrimaryButton(
-              onPressed: null,
-              child: Text(
+          PrimaryButton(onPressed: () {
+            if (_formKey.currentState?.validate() ?? false) {
+              context.read<AuthenticationCubit>().signInWithEmailAndPassword(
+                  _emailController.text.trim(),
+                  _passwordController.text.trim());
+            }
+          }, child: BlocBuilder<AuthenticationCubit, AuthenticationState>(
+            builder: (context, state) {
+              if (state is Authenticating) {
+                return CircularProgressIndicator(
+                  color: theme.primary,
+                );
+              }
+              return Text(
                 'Sign In',
                 style: theme.typography.labelLarge,
-              )),
+              );
+            },
+          )),
           const SizedBox(
             height: 30,
           ),
@@ -106,30 +134,52 @@ class _SignInFormState extends State<SignInForm> {
             height: 30,
           ),
           SecondaryButton(
-            onPressed: null,
+            onPressed: () {
+              context.read<AuthenticationCubit>().signInWithGoogle();
+            },
             prefix: Image.asset(
               "assets/images/google.png",
               height: 20,
               width: 20,
             ),
-            child: Text(
-              'Sign in with Google',
-              style: theme.typography.displaySmall,
+            child: BlocBuilder<AuthenticationCubit, AuthenticationState>(
+              builder: (context, state) {
+                if (state is AuthenticatingGoogle) {
+                  return CircularProgressIndicator(
+                    color: theme.secondary,
+                  );
+                }
+                return Text(
+                  'Sign in with Google',
+                  style: theme.typography.displaySmall,
+                );
+              },
             ),
           ),
           const SizedBox(
             height: 10,
           ),
           SecondaryButton(
-            onPressed: null,
+            onPressed: () {
+              context.read<AuthenticationCubit>().signInWithFacebook();
+            },
             prefix: Image.asset(
               "assets/images/facebook.png",
               height: 20,
               width: 20,
             ),
-            child: Text(
-              'Sign in with Facebook',
-              style: theme.typography.displaySmall,
+            child: BlocBuilder<AuthenticationCubit, AuthenticationState>(
+              builder: (context, state) {
+                if (state is AuthenticatingFacebook) {
+                  return CircularProgressIndicator(
+                    color: theme.secondary,
+                  );
+                }
+                return Text(
+                  'Sign in with Facebook',
+                  style: theme.typography.displaySmall,
+                );
+              },
             ),
           ),
           const SizedBox(

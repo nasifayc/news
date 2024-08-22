@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:news_app/models/bookmark.dart';
 
 // ignore: must_be_immutable
 class UserModel extends Equatable {
@@ -7,23 +8,24 @@ class UserModel extends Equatable {
   final String email;
   String? password;
   final String username;
-  final List<String> bookmarks;
+  final List<BookMark> bookmarks;
   List<String> followers;
   List<String> following;
   List<String> news;
   bool isVerfied;
 
-  UserModel(
-      {required this.id,
-      required this.email,
-      this.password,
-      required this.username,
-      this.photo,
-      this.bookmarks = const [],
-      this.followers = const [],
-      this.following = const [],
-      this.news = const [],
-      this.isVerfied = false});
+  UserModel({
+    required this.id,
+    required this.email,
+    this.password,
+    required this.username,
+    this.photo,
+    this.bookmarks = const [],
+    this.followers = const [],
+    this.following = const [],
+    this.news = const [],
+    this.isVerfied = false,
+  });
 
   Map<String, dynamic> toJson() {
     return {
@@ -31,7 +33,7 @@ class UserModel extends Equatable {
       'id': id,
       'email': email,
       'username': username,
-      'bookmarks': bookmarks,
+      'bookmarks': bookmarks.map((bookmark) => bookmark.toJson()).toList(),
       'followers': followers,
       'following': following,
       'news': news,
@@ -45,10 +47,22 @@ class UserModel extends Equatable {
       email: json['email'],
       username: json['username'],
       photo: json['photo'],
-      bookmarks: json['bookmarks'] as List<String>,
-      followers: json['followers'] as List<String>,
-      following: json['following'] as List<String>,
-      news: json['news'] as List<String>,
+      bookmarks: (json['bookmarks'] as List<dynamic>?)
+              ?.map((item) => BookMark.fromJson(item))
+              .toList() ??
+          [],
+      followers: (json['followers'] as List<dynamic>?)
+              ?.map((item) => item as String)
+              .toList() ??
+          [],
+      following: (json['following'] as List<dynamic>?)
+              ?.map((item) => item as String)
+              .toList() ??
+          [],
+      news: (json['news'] as List<dynamic>?)
+              ?.map((item) => item as String)
+              .toList() ??
+          [],
       isVerfied: json['isVerified'],
     );
   }

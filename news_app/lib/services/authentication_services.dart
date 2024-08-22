@@ -2,27 +2,32 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:news_app/config/login_manager.dart';
 import 'package:news_app/models/user_model.dart';
 
 class AuthenticationServices {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<User?> signupWithEmailAndPassword(UserModel userModel) async {
+  Future<User?> signupWithEmailAndPassword(
+      String username, String email, String password) async {
     UserCredential userCredential =
         await _firebaseAuth.createUserWithEmailAndPassword(
-      email: userModel.email,
-      password: userModel.password!,
+      email: email,
+      password: password,
     );
 
     User? user = userCredential.user;
 
     if (user != null) {
+      UserModel userModel =
+          UserModel(id: user.uid, email: email, username: username);
       // Add the user to Firestore
       await _firestore
           .collection('users')
           .doc(user.uid)
           .set(userModel.toJson());
+      await LoginManager.saveUser(user.uid);
       return user;
     } else {
       return null;
@@ -64,6 +69,7 @@ class AuthenticationServices {
             .collection('users')
             .doc(user.uid)
             .set(newUser.toJson());
+        await LoginManager.saveUser(user.uid);
       }
 
       return user;
@@ -93,10 +99,29 @@ class AuthenticationServices {
             .collection('users')
             .doc(user.uid)
             .set(newUser.toJson());
+        await LoginManager.saveUser(user.uid);
       }
 
       return user;
     }
     return null;
+  }
+
+  Future<UserModel?> getUser(String id) async {
+    DocumentSnapshot<Map<String, dynamic>>? doc =
+        await _firestore.collection('users').doc(id).get();
+    UserModel userModel = UserModel.fromJson(doc.data()!);
+    return userModel;
+  }
+
+  Future<void> resetPassword(String email) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
+  Future<void> signOut() async {
+    await LoginManager.deleteUser();
+    await _firebaseAuth.signOut();
+    await GoogleSignIn().signOut();
+    // await FacebookAuth.instance.logOut();
   }
 }

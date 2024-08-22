@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/config/theme/app_theme.dart';
+import 'package:news_app/controllers/authentication/authentication_cubit.dart';
+import 'package:news_app/controllers/authentication/authentication_state.dart';
 import 'package:news_app/widgets/common/custome_form_fields.dart';
 import 'package:news_app/widgets/common/primary_button.dart';
 
@@ -48,6 +51,12 @@ class _SignUpFormState extends State<SignUpForm> {
               height: 22,
               width: 22,
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Username is required!';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 15),
           formComponents.buildNormalTextField(
@@ -62,6 +71,12 @@ class _SignUpFormState extends State<SignUpForm> {
               height: 22,
               width: 22,
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Email is required!';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 15),
           formComponents.buildPasswordField(
@@ -76,12 +91,18 @@ class _SignUpFormState extends State<SignUpForm> {
               height: 22,
               width: 22,
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Passwors is required!';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 15),
           formComponents.buildPasswordField(
             _confirmPasswordController,
             Text(
-              "Confirm",
+              "Confirm Password",
               style: theme.typography.labelLarge2,
             ),
             prefixIcon: Image.asset(
@@ -90,16 +111,40 @@ class _SignUpFormState extends State<SignUpForm> {
               height: 22,
               width: 22,
             ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Confirm Password!';
+              }
+
+              if (value != _passwordController.text.trim()) {
+                return 'Passwords do not match!';
+              }
+              return null;
+            },
           ),
           const SizedBox(
             height: 10,
           ),
-          PrimaryButton(
-              onPressed: null,
-              child: Text(
+          PrimaryButton(onPressed: () {
+            if (_formKey.currentState?.validate() ?? false) {
+              context.read<AuthenticationCubit>().signUpWithEmailAndPassword(
+                  _usernameController.text.trim(),
+                  _emailController.text.trim(),
+                  _passwordController.text.trim());
+            }
+          }, child: BlocBuilder<AuthenticationCubit, AuthenticationState>(
+            builder: (context, state) {
+              if (state is Authenticating) {
+                return CircularProgressIndicator(
+                  color: theme.primary,
+                );
+              }
+              return Text(
                 'Sign Up',
                 style: theme.typography.labelLarge,
-              )),
+              );
+            },
+          )),
           const SizedBox(
             height: 40,
           ),
