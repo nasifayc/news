@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class NewsModel extends Equatable {
@@ -39,7 +40,7 @@ class NewsModel extends Equatable {
       category: json['category'],
       title: json['title'],
       description: json['description'],
-      createdDate: DateTime.parse(json['createdDate']),
+      createdDate: (json['createdDate'] as Timestamp).toDate(),
       imageUrl: json['imageUrl'],
       location: json['location'],
       author: json['author'],

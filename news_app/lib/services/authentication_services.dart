@@ -71,7 +71,7 @@ class AuthenticationServices {
             .set(newUser.toJson());
         await LoginManager.saveUser(user.uid);
       }
-
+      await LoginManager.saveUser(user!.uid);
       return user;
     }
     return null;

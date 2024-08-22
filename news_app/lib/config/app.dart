@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/config/app_navigator.dart';
 import 'package:news_app/config/theme/app_theme.dart';
 import 'package:news_app/controllers/authentication/authentication_cubit.dart';
+import 'package:news_app/controllers/news/news_cubit.dart';
 import 'package:news_app/models/user_model.dart';
 import 'package:news_app/screens/layouts/sign_in_screen.dart';
 import 'package:news_app/screens/layouts/sign_up_screen.dart';
 import 'package:news_app/services/authentication_services.dart';
+import 'package:news_app/services/news_services.dart';
 
 class App extends StatefulWidget {
   final String? userId;
@@ -45,14 +47,21 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'News',
-      theme: LightModeTheme().themeData,
-      routes: {
-        '/sign_in': (context) => const SignInScreen(),
-        '/sign_up': (context) => const SignUpScreen(),
-      },
-      home: const AppNavigator(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => NewsCubit(newsServices: NewsServices()),
+        )
+      ],
+      child: MaterialApp(
+        title: 'News',
+        theme: LightModeTheme().themeData,
+        routes: {
+          '/sign_in': (context) => const SignInScreen(),
+          '/sign_up': (context) => const SignUpScreen(),
+        },
+        home: const AppNavigator(),
+      ),
     );
   }
 }

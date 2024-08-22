@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/controllers/authentication/authentication_cubit.dart';
 import 'package:news_app/controllers/authentication/authentication_state.dart';
-import 'package:news_app/screens/main_screens/home_screen.dart';
+import 'package:news_app/screens/landing_page.dart';
 import 'package:news_app/screens/onboarding_screen.dart';
 
 class AppNavigator extends StatelessWidget {
@@ -19,7 +19,7 @@ class AppNavigator extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is Authenticated) {
-          return HomeScreen(user: state.user);
+          return const LandingPage();
         }
         return const OnboardingScreen();
       },

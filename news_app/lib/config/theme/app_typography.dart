@@ -12,9 +12,11 @@ abstract class AppTypography {
   TextStyle get headlineSmall;
   TextStyle get headlineSmall2;
   TextStyle get titleLarge;
+  TextStyle get titleLarge2;
   TextStyle get titleMedium;
   TextStyle get titleMedium2;
   TextStyle get titleSmall;
+  TextStyle get titleSmall2;
   TextStyle get labelLarge;
   TextStyle get labelMedium;
   TextStyle get labelSmall;
@@ -66,7 +68,7 @@ class ThemeTypography extends AppTypography {
         fontFamily: fontFamily,
         color: theme.primaryText,
         fontWeight: FontWeight.bold,
-        fontSize: 24,
+        fontSize: 26,
       );
   @override
   TextStyle get headlineMedium2 => TextStyle(
@@ -91,29 +93,43 @@ class ThemeTypography extends AppTypography {
       );
   @override
   TextStyle get titleLarge => TextStyle(
-        fontFamily: fontFamily,
-        color: theme.primaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 22,
-      );
+      fontFamily: fontFamily,
+      color: theme.info,
+      fontWeight: FontWeight.normal,
+      fontSize: 22,
+      overflow: TextOverflow.ellipsis);
+  @override
+  TextStyle get titleLarge2 => TextStyle(
+      fontFamily: fontFamily,
+      color: theme.info,
+      fontWeight: FontWeight.bold,
+      fontSize: 24,
+      overflow: TextOverflow.ellipsis);
   @override
   TextStyle get titleMedium => TextStyle(
-        fontFamily: fontFamily,
-        color: theme.primaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 18,
-      );
+      fontFamily: fontFamily,
+      color: theme.info,
+      fontWeight: FontWeight.normal,
+      fontSize: 18,
+      overflow: TextOverflow.ellipsis);
   @override
   TextStyle get titleMedium2 => TextStyle(
-        fontFamily: fontFamily,
-        color: theme.secondaryText,
-        fontWeight: FontWeight.normal,
-        fontSize: 18,
-      );
+      fontFamily: fontFamily,
+      color: theme.info,
+      fontWeight: FontWeight.bold,
+      fontSize: 20,
+      overflow: TextOverflow.ellipsis);
   @override
   TextStyle get titleSmall => TextStyle(
       fontFamily: fontFamily,
-      color: theme.primaryText,
+      color: theme.info,
+      fontWeight: FontWeight.normal,
+      fontSize: 16,
+      overflow: TextOverflow.ellipsis);
+  @override
+  TextStyle get titleSmall2 => TextStyle(
+      fontFamily: fontFamily,
+      color: theme.accent2,
       fontWeight: FontWeight.normal,
       fontSize: 16,
       overflow: TextOverflow.ellipsis);
