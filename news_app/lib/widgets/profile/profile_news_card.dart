@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/config/theme/app_theme.dart';
@@ -38,9 +39,7 @@ class ProfileNewsCard extends StatelessWidget {
                                   ? Image.asset(
                                       'assets/images/megaphone.png',
                                     ) as ImageProvider
-                                  : NetworkImage(
-                                      user.photo!,
-                                    ),
+                                  : CachedNetworkImageProvider(user.photo!),
                               fit: BoxFit.cover)),
                     ),
                     const SizedBox(
@@ -111,7 +110,8 @@ class ProfileNewsCard extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                    image: NetworkImage(news.imageUrl), fit: BoxFit.cover)),
+                    image: CachedNetworkImageProvider(news.imageUrl),
+                    fit: BoxFit.cover)),
           )
         ],
       ),

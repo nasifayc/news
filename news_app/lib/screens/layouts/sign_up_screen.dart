@@ -4,7 +4,6 @@ import 'package:news_app/config/theme/app_theme.dart';
 import 'package:news_app/controllers/authentication/authentication_cubit.dart';
 import 'package:news_app/controllers/authentication/authentication_state.dart';
 import 'package:news_app/screens/landing_page.dart';
-import 'package:news_app/screens/main_screens/home_screen.dart';
 import 'package:news_app/widgets/authentication/sign_up_form.dart';
 
 class SignUpScreen extends StatefulWidget {

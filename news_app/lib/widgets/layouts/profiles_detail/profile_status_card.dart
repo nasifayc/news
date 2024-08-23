@@ -99,6 +99,5 @@ class ProfileStatusCard extends StatelessWidget {
         )
       ],
     );
-    ;
   }
 }

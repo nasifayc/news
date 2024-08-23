@@ -14,7 +14,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   String? userId = await LoginManager.getUser();
-  print(userId);
+  // print(userId);
   runApp(BlocProvider(
     create: (context) =>
         AuthenticationCubit(authenticationServices: AuthenticationServices()),

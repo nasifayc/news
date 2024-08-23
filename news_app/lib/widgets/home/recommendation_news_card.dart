@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/config/theme/app_theme.dart';
 import 'package:news_app/models/news_model.dart';
@@ -65,9 +66,8 @@ class _RecommendationNewsCardState extends State<RecommendationNewsCard> {
                                         ? Image.asset(
                                             'assets/images/megaphone.png',
                                           ) as ImageProvider
-                                        : NetworkImage(
-                                            user.photo!,
-                                          ),
+                                        : CachedNetworkImageProvider(
+                                            user.photo!),
                                     fit: BoxFit.cover)),
                           ),
                         ),
@@ -75,12 +75,6 @@ class _RecommendationNewsCardState extends State<RecommendationNewsCard> {
                           width: 5,
                         ),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  ProfilesDetailScreen(user: user),
-                            ));
-                          },
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -165,7 +159,8 @@ class _RecommendationNewsCardState extends State<RecommendationNewsCard> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                              image: NetworkImage(widget.news.imageUrl),
+                              image: CachedNetworkImageProvider(
+                                  widget.news.imageUrl),
                               fit: BoxFit.cover)),
                     )
                   ],

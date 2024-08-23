@@ -21,7 +21,7 @@ class StaticUtils {
   static Shimmer getShimmerEffect(AppTheme theme, {double height = 100}) {
     return Shimmer.fromColors(
       baseColor: theme.primary,
-      highlightColor: Colors.grey[100]!,
+      highlightColor: Colors.white,
       child: Container(
         width: double.infinity,
         height: height,

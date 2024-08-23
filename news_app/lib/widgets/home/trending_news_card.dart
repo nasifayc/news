@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/config/theme/app_theme.dart';
 import 'package:news_app/models/news_model.dart';
@@ -5,7 +6,6 @@ import 'package:news_app/models/user_model.dart';
 import 'package:news_app/screens/layouts/profiles_detail_screen.dart';
 import 'package:news_app/services/authentication_services.dart';
 import 'package:news_app/utils/static_utils.dart';
-import 'package:shimmer/shimmer.dart';
 
 class TrendingNewsCard extends StatefulWidget {
   final NewsModel news;
@@ -40,9 +40,7 @@ class _TrendingNewsCardState extends State<TrendingNewsCard> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: NetworkImage(
-                          widget.news.imageUrl,
-                        ),
+                        image: CachedNetworkImageProvider(widget.news.imageUrl),
                         fit: BoxFit.cover)),
               ),
               Padding(
@@ -94,12 +92,10 @@ class _TrendingNewsCardState extends State<TrendingNewsCard> {
                                                   BorderRadius.circular(4),
                                               image: DecorationImage(
                                                 image: user.photo == null
-                                                    ? Image.asset(
-                                                        'assets/images/megaphone.png',
-                                                      ) as ImageProvider
-                                                    : NetworkImage(
-                                                        user.photo!,
-                                                      ),
+                                                    ? const AssetImage(
+                                                        'assets/images/megaphone.png')
+                                                    : CachedNetworkImageProvider(
+                                                        user.photo!),
                                                 fit: BoxFit
                                                     .cover, // This ensures the image fits the box properly
                                               ),

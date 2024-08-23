@@ -1,12 +1,8 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:news_app/config/login_manager.dart';
 import 'package:news_app/models/bookmark.dart';
 import 'package:news_app/models/news_model.dart';
 import 'package:news_app/models/user_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class NewsServices {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
