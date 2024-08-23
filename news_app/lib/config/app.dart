@@ -5,6 +5,7 @@ import 'package:news_app/config/theme/app_theme.dart';
 import 'package:news_app/controllers/authentication/authentication_cubit.dart';
 import 'package:news_app/controllers/news/news_cubit.dart';
 import 'package:news_app/models/user_model.dart';
+import 'package:news_app/screens/layouts/profiles_detail_screen.dart';
 import 'package:news_app/screens/layouts/sign_in_screen.dart';
 import 'package:news_app/screens/layouts/sign_up_screen.dart';
 import 'package:news_app/services/authentication_services.dart';

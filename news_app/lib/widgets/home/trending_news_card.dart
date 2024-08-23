@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/config/theme/app_theme.dart';
 import 'package:news_app/models/news_model.dart';
 import 'package:news_app/models/user_model.dart';
+import 'package:news_app/screens/layouts/profiles_detail_screen.dart';
 import 'package:news_app/services/authentication_services.dart';
 import 'package:news_app/utils/static_utils.dart';
 import 'package:shimmer/shimmer.dart';
@@ -75,43 +76,52 @@ class _TrendingNewsCardState extends State<TrendingNewsCard> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: 25,
-                                          height: 25,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            image: DecorationImage(
-                                              image: user.photo == null
-                                                  ? Image.asset(
-                                                      'assets/images/megaphone.png',
-                                                    ) as ImageProvider
-                                                  : NetworkImage(
-                                                      user.photo!,
-                                                    ),
-                                              fit: BoxFit
-                                                  .cover, // This ensures the image fits the box properly
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProfilesDetailScreen(user: user),
+                                        ));
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: 25,
+                                            height: 25,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                              image: DecorationImage(
+                                                image: user.photo == null
+                                                    ? Image.asset(
+                                                        'assets/images/megaphone.png',
+                                                      ) as ImageProvider
+                                                    : NetworkImage(
+                                                        user.photo!,
+                                                      ),
+                                                fit: BoxFit
+                                                    .cover, // This ensures the image fits the box properly
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          '${user.username.toUpperCase()} News',
-                                          style: theme.typography.titleSmall2,
-                                        ),
-                                        user.isVerfied
-                                            ? Image.asset(
-                                                'assets/images/verify.png',
-                                                width: 18,
-                                                height: 18,
-                                                color: theme.secondaryText,
-                                              )
-                                            : const SizedBox.shrink()
-                                      ],
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            '${user.username.toUpperCase()} News',
+                                            style: theme.typography.titleSmall2,
+                                          ),
+                                          user.isVerfied
+                                              ? Image.asset(
+                                                  'assets/images/verify.png',
+                                                  width: 18,
+                                                  height: 18,
+                                                  color: theme.secondaryText,
+                                                )
+                                              : const SizedBox.shrink()
+                                        ],
+                                      ),
                                     ),
                                     Text(
                                       StaticUtils.formatDate(

@@ -22,7 +22,7 @@ class UserBioCard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    '${user.username} News',
+                    '${StaticUtils.capitalize(user.username)} News',
                     style: theme.typography.headlineMedium,
                     maxLines: 2,
                   ),

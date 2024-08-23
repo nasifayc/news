@@ -91,10 +91,10 @@ class ProfileCard extends StatelessWidget {
                       height: 10,
                     ),
                     Container(
-                      height: 50,
+                      height: 41,
                       decoration: BoxDecoration(
                           color: theme.primary,
-                          borderRadius: BorderRadius.circular(10)),
+                          borderRadius: BorderRadius.circular(8)),
                       child: Center(
                         child: Text(
                           'Create news',

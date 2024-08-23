@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/config/theme/app_theme.dart';
 import 'package:news_app/controllers/authentication/authentication_cubit.dart';
 import 'package:news_app/controllers/authentication/authentication_state.dart';
+import 'package:news_app/utils/static_utils.dart';
 
 class WelcomeCard extends StatelessWidget {
   const WelcomeCard({super.key});
@@ -17,7 +18,7 @@ class WelcomeCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Welcome Back, ${state.user.username}!",
+                "Welcome Back, ${StaticUtils.capitalize(state.user.username)}!",
                 maxLines: 2,
                 style: theme.typography.headlineMedium,
               ),

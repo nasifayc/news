@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:news_app/config/theme/app_theme.dart';
 import 'package:news_app/models/news_model.dart';
 import 'package:news_app/models/user_model.dart';
+import 'package:news_app/screens/layouts/profiles_detail_screen.dart';
 import 'package:news_app/services/authentication_services.dart';
 import 'package:news_app/utils/static_utils.dart';
-import 'package:shimmer/shimmer.dart';
 
 class RecommendationNewsCard extends StatefulWidget {
   final NewsModel news;
@@ -48,48 +48,64 @@ class _RecommendationNewsCardState extends State<RecommendationNewsCard> {
                   children: [
                     Row(
                       children: [
-                        Container(
-                          height: 36,
-                          width: 36,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              image: DecorationImage(
-                                  image: user.photo == null
-                                      ? Image.asset(
-                                          'assets/images/megaphone.png',
-                                        ) as ImageProvider
-                                      : NetworkImage(
-                                          user.photo!,
-                                        ),
-                                  fit: BoxFit.cover)),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  ProfilesDetailScreen(user: user),
+                            ));
+                          },
+                          child: Container(
+                            height: 36,
+                            width: 36,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                image: DecorationImage(
+                                    image: user.photo == null
+                                        ? Image.asset(
+                                            'assets/images/megaphone.png',
+                                          ) as ImageProvider
+                                        : NetworkImage(
+                                            user.photo!,
+                                          ),
+                                    fit: BoxFit.cover)),
+                          ),
                         ),
                         const SizedBox(
                           width: 5,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  capitalize(user.username),
-                                  style: theme.typography.headlineMedium2,
-                                ),
-                                user.isVerfied
-                                    ? Image.asset(
-                                        'assets/images/verify.png',
-                                        width: 18,
-                                        height: 18,
-                                        color: theme.secondaryText,
-                                      )
-                                    : const SizedBox.shrink()
-                              ],
-                            ),
-                            Text(
-                              StaticUtils.formatDate(widget.news.createdDate),
-                              style: theme.typography.headlineSmall2,
-                            )
-                          ],
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  ProfilesDetailScreen(user: user),
+                            ));
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    capitalize(user.username),
+                                    style: theme.typography.headlineMedium2,
+                                  ),
+                                  user.isVerfied
+                                      ? Image.asset(
+                                          'assets/images/verify.png',
+                                          width: 18,
+                                          height: 18,
+                                          color: theme.secondaryText,
+                                        )
+                                      : const SizedBox.shrink()
+                                ],
+                              ),
+                              Text(
+                                StaticUtils.formatDate(widget.news.createdDate),
+                                style: theme.typography.headlineSmall2,
+                              )
+                            ],
+                          ),
                         ),
                         const Spacer(),
                         GestureDetector(
