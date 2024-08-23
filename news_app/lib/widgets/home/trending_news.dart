@@ -25,7 +25,7 @@ class _TrendingNewsState extends State<TrendingNews> {
           if (state is NewsLoading) {
             return Center(
                 child: CircularProgressIndicator(
-              color: theme.secondary,
+              color: theme.info,
             ));
           } else if (state is NewsLoaded) {
             if (state.allNews.isEmpty) {

@@ -23,6 +23,7 @@ abstract class AppTypography {
   TextStyle get labelLarge2;
   TextStyle get labelMedium2;
   TextStyle get labelSmall2;
+  TextStyle get labelSmall3;
   TextStyle get bodyLargeWhite;
   TextStyle get bodyMediumWhite;
   TextStyle get bodySmallWhite;
@@ -117,7 +118,7 @@ class ThemeTypography extends AppTypography {
       fontFamily: fontFamily,
       color: theme.info,
       fontWeight: FontWeight.bold,
-      fontSize: 20,
+      fontSize: 18,
       overflow: TextOverflow.ellipsis);
   @override
   TextStyle get titleSmall => TextStyle(
@@ -174,6 +175,13 @@ class ThemeTypography extends AppTypography {
   TextStyle get labelSmall2 => TextStyle(
         fontFamily: fontFamily,
         color: theme.accent2,
+        fontWeight: FontWeight.normal,
+        fontSize: 14,
+      );
+  @override
+  TextStyle get labelSmall3 => TextStyle(
+        fontFamily: fontFamily,
+        color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14,
       );

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/config/theme/app_theme.dart';
 import 'package:news_app/controllers/news/news_cubit.dart';
 import 'package:news_app/widgets/home/home_app_bar.dart';
+import 'package:news_app/widgets/home/recommendation_news.dart';
 import 'package:news_app/widgets/home/trending_news.dart';
 import 'package:news_app/widgets/home/welcome_card.dart';
 
@@ -47,16 +48,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 const TrendingNews(),
+                const SizedBox(
+                  height: 20,
+                ),
                 Text(
                   'Recommendation',
                   style: theme.typography.titleMedium2,
                 ),
                 const SizedBox(
-                  height: 400,
+                  height: 20,
                 ),
+                const RecommendationNews(),
               ],
             ),
           ),

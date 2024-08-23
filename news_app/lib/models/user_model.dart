@@ -7,6 +7,7 @@ class UserModel extends Equatable {
   final String id;
   final String email;
   String? password;
+  String? bio;
   final String username;
   final List<BookMark> bookmarks;
   List<String> followers;
@@ -18,6 +19,7 @@ class UserModel extends Equatable {
     required this.id,
     required this.email,
     this.password,
+    this.bio,
     required this.username,
     this.photo,
     this.bookmarks = const [],
@@ -32,6 +34,7 @@ class UserModel extends Equatable {
       'photo': photo,
       'id': id,
       'email': email,
+      'bio': bio,
       'username': username,
       'bookmarks': bookmarks.map((bookmark) => bookmark.toJson()).toList(),
       'followers': followers,
@@ -45,6 +48,7 @@ class UserModel extends Equatable {
     return UserModel(
       id: json['id'],
       email: json['email'],
+      bio: json['bio'],
       username: json['username'],
       photo: json['photo'],
       bookmarks: (json['bookmarks'] as List<dynamic>?)
@@ -72,6 +76,7 @@ class UserModel extends Equatable {
         photo,
         id,
         email,
+        bio,
         password,
         username,
         bookmarks,
