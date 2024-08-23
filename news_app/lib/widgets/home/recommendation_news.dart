@@ -4,6 +4,7 @@ import 'package:news_app/config/theme/app_theme.dart';
 import 'package:news_app/controllers/news/news_cubit.dart';
 import 'package:news_app/controllers/news/news_state.dart';
 import 'package:news_app/models/news_model.dart';
+import 'package:news_app/utils/static_utils.dart';
 import 'package:news_app/widgets/home/recommendation_news_card.dart';
 
 class RecommendationNews extends StatefulWidget {
@@ -44,11 +45,7 @@ class _RecommendationNewsState extends State<RecommendationNews> {
             );
           }
         } else if (state is NewsLoading) {
-          return Center(
-            child: CircularProgressIndicator(
-              color: theme.info,
-            ),
-          );
+          return StaticUtils.getShimmerEffect(theme);
         } else if (state is NewsError) {
           return Text(
             state.error,

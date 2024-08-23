@@ -32,7 +32,7 @@ class _AppState extends State<App> {
         UserModel? user = await auth.getUser(widget.userId!);
         _emitAuthenticated(user!);
       } catch (e) {
-        _emitUnAuthenticated();
+        _emitUnAuthenticated(e.toString());
       }
     }
   }
@@ -41,8 +41,8 @@ class _AppState extends State<App> {
     context.read<AuthenticationCubit>().emitAuthenticated(user);
   }
 
-  void _emitUnAuthenticated() {
-    context.read<AuthenticationCubit>().emitUnauthenticated();
+  void _emitUnAuthenticated(String e) {
+    context.read<AuthenticationCubit>().emitUnauthenticated(e);
   }
 
   @override

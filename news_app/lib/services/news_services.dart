@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:news_app/config/login_manager.dart';
 import 'package:news_app/models/bookmark.dart';
 import 'package:news_app/models/news_model.dart';
 import 'package:news_app/models/user_model.dart';
@@ -27,8 +31,7 @@ class NewsServices {
   }
 
   Future<List<NewsModel>> getYourNews() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userId = prefs.getString('userId');
+    String? userId = await LoginManager.getUser();
 
     if (userId == null) {
       return [];
@@ -51,8 +54,7 @@ class NewsServices {
   }
 
   Future<List<NewsModel>> getBookmarkedNews() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userId = prefs.getString('userId');
+    String? userId = await LoginManager.getUser();
 
     if (userId == null) {
       return [];

@@ -4,6 +4,7 @@ import 'package:news_app/config/theme/app_theme.dart';
 import 'package:news_app/controllers/news/news_cubit.dart';
 import 'package:news_app/controllers/news/news_state.dart';
 import 'package:news_app/models/news_model.dart';
+import 'package:news_app/utils/static_utils.dart';
 import 'package:news_app/widgets/home/trending_news_card.dart';
 
 class TrendingNews extends StatefulWidget {
@@ -23,10 +24,7 @@ class _TrendingNewsState extends State<TrendingNews> {
       child: BlocBuilder<NewsCubit, NewsState>(
         builder: (context, state) {
           if (state is NewsLoading) {
-            return Center(
-                child: CircularProgressIndicator(
-              color: theme.info,
-            ));
+            return StaticUtils.getShimmerEffect(theme);
           } else if (state is NewsLoaded) {
             if (state.allNews.isEmpty) {
               return Center(

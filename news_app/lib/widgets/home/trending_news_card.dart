@@ -4,6 +4,7 @@ import 'package:news_app/models/news_model.dart';
 import 'package:news_app/models/user_model.dart';
 import 'package:news_app/services/authentication_services.dart';
 import 'package:news_app/utils/static_utils.dart';
+import 'package:shimmer/shimmer.dart';
 
 class TrendingNewsCard extends StatefulWidget {
   final NewsModel news;
@@ -63,10 +64,8 @@ class _TrendingNewsCardState extends State<TrendingNewsCard> {
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Center(
-                              child: CircularProgressIndicator(
-                            color: theme.info,
-                          ));
+                          return StaticUtils.getShimmerEffect(
+                              height: 25, theme);
                         } else if (snapshot.hasError) {
                           return Text('Error: ${snapshot.error}');
                         } else if (snapshot.hasData) {

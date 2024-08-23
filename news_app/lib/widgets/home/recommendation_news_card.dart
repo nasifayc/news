@@ -4,6 +4,7 @@ import 'package:news_app/models/news_model.dart';
 import 'package:news_app/models/user_model.dart';
 import 'package:news_app/services/authentication_services.dart';
 import 'package:news_app/utils/static_utils.dart';
+import 'package:shimmer/shimmer.dart';
 
 class RecommendationNewsCard extends StatefulWidget {
   final NewsModel news;
@@ -35,11 +36,7 @@ class _RecommendationNewsCardState extends State<RecommendationNewsCard> {
             future: getUserModel(widget.news.author),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: theme.info,
-                  ),
-                );
+                return StaticUtils.getShimmerEffect(height: 36, theme);
               } else if (snapshot.hasError) {
                 return Text(
                   'Error fetching user data${snapshot.error}',

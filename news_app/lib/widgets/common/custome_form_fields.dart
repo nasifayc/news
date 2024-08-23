@@ -105,7 +105,7 @@ class CustomFormComponents {
           value: item,
           child: Text(
             item,
-            style: theme.typography.displaySmall,
+            style: theme.typography.titleSmall,
           ),
         );
       }).toList(),

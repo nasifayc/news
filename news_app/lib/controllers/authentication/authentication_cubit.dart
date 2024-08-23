@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/config/login_manager.dart';
 import 'package:news_app/controllers/authentication/authentication_state.dart';
 import 'package:news_app/models/user_model.dart';
 import 'package:news_app/services/authentication_services.dart';
@@ -17,6 +18,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       if (user != null) {
         UserModel? usermodel = await authenticationServices.getUser(user.uid);
         if (usermodel != null) {
+          await LoginManager.saveUser(user.uid);
           emit(Authenticated(user: usermodel));
         } else {
           emit(AuthenticationFailed(errorMessage: usermodel.toString()));
@@ -110,7 +112,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     emit(Authenticated(user: user));
   }
 
-  void emitUnauthenticated() {
-    emit(AuthenticationInitial());
+  void emitUnauthenticated(String error) {
+    emit(AuthenticationFailed(errorMessage: error));
   }
 }

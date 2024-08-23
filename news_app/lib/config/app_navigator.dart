@@ -15,7 +15,7 @@ class AppNavigator extends StatelessWidget {
         if (state is AuthenticationFailed) {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(state.errorMessage)));
-        } else if (state is Authenticated) {}
+        }
       },
       builder: (context, state) {
         if (state is Authenticated) {
