@@ -50,7 +50,7 @@ class AgentNews extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        formComponents.buildSearchBar(searchController, 'Search “News”'),
+        formComponents.buildSearchBar(searchController, 'Search “News”', false),
         const SizedBox(
           height: 20,
         ),

@@ -32,7 +32,7 @@ class _TrendingNewsCardState extends State<TrendingNewsCard> {
           decoration: BoxDecoration(
               color: theme.inputFieldBackground,
               borderRadius: BorderRadius.circular(10)),
-          width: MediaQuery.of(context).size.width * 0.65,
+          width: MediaQuery.of(context).size.width * 0.7,
           child: Column(
             children: [
               Container(

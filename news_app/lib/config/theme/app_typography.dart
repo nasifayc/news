@@ -144,7 +144,7 @@ class ThemeTypography extends AppTypography {
   @override
   TextStyle get labelMedium => TextStyle(
       fontFamily: fontFamily,
-      color: theme.primary,
+      color: Colors.white,
       fontWeight: FontWeight.bold,
       fontSize: 16,
       overflow: TextOverflow.ellipsis);

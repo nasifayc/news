@@ -7,10 +7,12 @@ class CustomFormComponents {
     theme = AppTheme.of(context);
   }
   late AppTheme theme;
-  Widget buildSearchBar(TextEditingController controller, String hintText,
-      {String? Function(String?)? validator}) {
+  Widget buildSearchBar(
+      TextEditingController controller, String hintText, bool isReadOnly,
+      {String? Function(String?)? validator, void Function()? onTap}) {
     return TextFormField(
       controller: controller,
+      readOnly: isReadOnly,
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: const Icon(Icons.search),
@@ -22,6 +24,7 @@ class CustomFormComponents {
         ),
       ),
       validator: validator,
+      onTap: onTap,
     );
   }
 

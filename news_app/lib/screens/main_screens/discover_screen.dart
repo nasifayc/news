@@ -16,54 +16,59 @@ class DiscoverScreen extends StatelessWidget {
     TextEditingController searchController = TextEditingController();
 
     return SafeArea(
-      child: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
-            const SliverToBoxAdapter(child: DiscoverAppBar()),
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 20),
-            ),
-            SliverToBoxAdapter(
-              child: formComponents.buildSearchBar(
-                  searchController, 'Search "News"'),
-            ),
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 20),
-            ),
-            SliverToBoxAdapter(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Publishers',
-                    style: theme.typography.titleMedium2,
-                  ),
-                  Text(
-                    'See all',
-                    style: theme.typography.titleSmall2,
-                  ),
-                ],
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              const SliverToBoxAdapter(child: DiscoverAppBar()),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 20),
               ),
-            ),
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 10),
-            ),
-            const SliverToBoxAdapter(child: Publishers()),
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 10),
-            ),
-            SliverToBoxAdapter(
-              child: Text(
-                'News',
-                style: theme.typography.titleMedium2,
+              SliverToBoxAdapter(
+                child: formComponents.buildSearchBar(
+                    searchController, 'Search "News"', true, onTap: () {
+                  Navigator.pushNamed(context, '/search');
+                }),
               ),
-            ),
-            const SliverToBoxAdapter(
-              child: SizedBox(height: 10),
-            ),
-          ];
-        },
-        body: const DiscoverNews(),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 20),
+              ),
+              SliverToBoxAdapter(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Publishers',
+                      style: theme.typography.titleMedium2,
+                    ),
+                    Text(
+                      'See all',
+                      style: theme.typography.titleSmall2,
+                    ),
+                  ],
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 10),
+              ),
+              const SliverToBoxAdapter(child: Publishers()),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 10),
+              ),
+              SliverToBoxAdapter(
+                child: Text(
+                  'News',
+                  style: theme.typography.titleMedium2,
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 10),
+              ),
+            ];
+          },
+          body: const DiscoverNews(),
+        ),
       ),
     );
   }

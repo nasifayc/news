@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/config/login_manager.dart';
@@ -15,21 +17,13 @@ class Publishers extends StatefulWidget {
 
 class _PublishersState extends State<Publishers> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  late String? userId;
-
-  @override
-  void initState() {
-    super.initState();
-    _initilize();
-  }
-
-  void _initilize() async {
-    userId = await LoginManager.getUser();
-  }
 
   Future<List<UserModel>> getPublishers() async {
-    QuerySnapshot<Map<String, dynamic>> querySnapshot =
-        await _firestore.collection('users').get();
+    final String? userId = await LoginManager.getUser();
+    QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
+        .collection('users')
+        .where('id', isNotEqualTo: userId)
+        .get();
 
     return querySnapshot.docs
         .map((doc) => UserModel.fromJson(doc.data()))
@@ -69,17 +63,14 @@ class _PublishersState extends State<Publishers> {
               itemCount: publishers.length,
               itemBuilder: (context, index) {
                 UserModel publisher = publishers[index];
-                if (publisher.id != userId) {
-                  return Row(
-                    children: [
-                      PublisherCard(publisher: publisher),
-                      const SizedBox(
-                        width: 10,
-                      )
-                    ],
-                  );
-                }
-                return null;
+                return Row(
+                  children: [
+                    PublisherCard(publisher: publisher),
+                    const SizedBox(
+                      width: 10,
+                    )
+                  ],
+                );
               },
             );
           } else {
