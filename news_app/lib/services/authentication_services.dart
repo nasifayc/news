@@ -60,7 +60,7 @@ class AuthenticationServices {
       User? user = userCredential.user;
 
       if (userCredential.additionalUserInfo!.isNewUser) {
-        // Add new user to Firestore
+        // Adding new user to Firestore
         UserModel newUser = UserModel(
             id: user!.uid,
             email: user.email!,
@@ -95,7 +95,7 @@ class AuthenticationServices {
             email: user.email!,
             username: user.displayName!,
             photo: user.photoURL);
-        // Add new user to Firestore
+        // Adding new user to Firestore
         await _firestore
             .collection('users')
             .doc(user.uid)

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/config/theme/app_theme.dart';
 import 'package:news_app/widgets/bookmark/bookmark_bar.dart';
 import 'package:news_app/widgets/bookmark/bookmark_collection.dart';
 import 'package:news_app/widgets/common/custome_form_fields.dart';

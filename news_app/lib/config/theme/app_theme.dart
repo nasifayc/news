@@ -73,12 +73,7 @@ class LightModeTheme extends AppTheme {
   LinearGradient get primaryBackgroundGradient => const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [
-          // const Color.fromARGB(255, 255, 255, 255)
-          //     .withOpacity(0.9),
-          // const Color(0xFF80B8F1)
-          Color(0xFFFFFFFF), Color(0xFFFFFFFF)
-        ],
+        colors: [Color(0xFFFFFFFF), Color(0xFFFFFFFF)],
       );
 
   @override

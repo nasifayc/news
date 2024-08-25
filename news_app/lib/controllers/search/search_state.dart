@@ -46,5 +46,5 @@ final class SearchWithFilter extends SearchState {
       {this.date = '', this.category = const [], this.location = const []});
 
   @override
-  List<Object> get props => [super.props, date!, category, location];
+  List<Object> get props => [super.props, date, category, location];
 }

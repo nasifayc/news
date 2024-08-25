@@ -7,7 +7,6 @@ import 'package:news_app/models/news_model.dart';
 import 'package:news_app/utils/static_utils.dart';
 import 'package:news_app/widgets/common/custome_form_fields.dart';
 import 'package:news_app/widgets/layouts/search/searched_news_card.dart';
-import 'package:news_app/widgets/profile/profile_news_card.dart';
 
 class SearchedNews extends StatelessWidget {
   const SearchedNews({super.key});
