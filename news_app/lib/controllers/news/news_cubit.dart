@@ -3,6 +3,8 @@ import 'package:news_app/controllers/news/news_state.dart';
 import 'package:news_app/models/news_model.dart';
 import 'package:news_app/services/news_services.dart';
 
+// a class for manageing all incomeing news data from firbase
+
 class NewsCubit extends Cubit<NewsState> {
   final NewsServices newsServices;
   NewsCubit({required this.newsServices}) : super(NewsInitial());

@@ -5,6 +5,8 @@ import 'package:news_app/controllers/authentication/authentication_state.dart';
 import 'package:news_app/models/user_model.dart';
 import 'package:news_app/services/authentication_services.dart';
 
+// A state management class for managing authentication
+
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   final AuthenticationServices authenticationServices;
   AuthenticationCubit({required this.authenticationServices})
@@ -64,6 +66,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
   }
 
+// Google Authentication
   void signInWithGoogle() async {
     emit(AuthenticatingGoogle());
     try {

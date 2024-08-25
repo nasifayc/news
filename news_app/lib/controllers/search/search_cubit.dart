@@ -1,17 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/controllers/search/search_state.dart';
 
+// a state mangemnet class to manage the filter functionality of searching
+
 class SearchCubit extends Cubit<SearchState> {
   SearchCubit() : super(SearchWithFilter());
 
   void searchWithFilter(String dateFilter, List<String> categoryFilter,
       List<String> locationFilter) {
-    // if (dateFilter == null ||
-    //     categoryFilter.isEmpty ||
-    //     locationFilter.isEmpty) {
-    //   return;
-    // }
-
     emit(SearchWithFilter(
         date: dateFilter, category: categoryFilter, location: locationFilter));
   }
