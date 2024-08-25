@@ -1,10 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/config/theme/app_theme.dart';
+import 'package:news_app/controllers/authentication/authentication_cubit.dart';
+import 'package:news_app/controllers/authentication/authentication_state.dart';
 import 'package:news_app/models/news_model.dart';
 import 'package:news_app/models/user_model.dart';
 import 'package:news_app/screens/layouts/profiles_detail_screen.dart';
-import 'package:news_app/services/authentication_services.dart';
+
 import 'package:news_app/utils/static_utils.dart';
 
 class RecommendationNewsCard extends StatefulWidget {
@@ -16,11 +20,10 @@ class RecommendationNewsCard extends StatefulWidget {
 }
 
 class _RecommendationNewsCardState extends State<RecommendationNewsCard> {
-  AuthenticationServices auth = AuthenticationServices();
   String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
-  Future<UserModel?> getUserModel(String id) async {
-    return await auth.getUser(id);
+  void updateUser(UserModel user) {
+    context.read<AuthenticationCubit>().updateUser(user);
   }
 
   @override
@@ -33,8 +36,11 @@ class _RecommendationNewsCardState extends State<RecommendationNewsCard> {
           color: theme.inputFieldBackground),
       child: Column(
         children: [
-          FutureBuilder(
-            future: getUserModel(widget.news.author),
+          StreamBuilder<DocumentSnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('users')
+                .doc(widget.news.author)
+                .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return StaticUtils.getShimmerEffect(height: 36, theme);
@@ -43,7 +49,8 @@ class _RecommendationNewsCardState extends State<RecommendationNewsCard> {
                   'Error fetching user data${snapshot.error}',
                 );
               } else if (snapshot.hasData) {
-                UserModel user = snapshot.data!;
+                UserModel user = UserModel.fromJson(
+                    snapshot.data!.data() as Map<String, dynamic>);
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -102,20 +109,58 @@ class _RecommendationNewsCardState extends State<RecommendationNewsCard> {
                           ),
                         ),
                         const Spacer(),
-                        GestureDetector(
-                          onTap: null,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 30, vertical: 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(7),
-                              color: theme.primary,
-                            ),
-                            child: Text(
-                              'Follow',
-                              style: theme.typography.titleMedium2,
-                            ),
-                          ),
+                        BlocBuilder<AuthenticationCubit, AuthenticationState>(
+                          builder: (context, state) {
+                            if (state is Authenticated) {
+                              if (state.user.id == user.id) {
+                                return const SizedBox.shrink();
+                              }
+                              bool isFollower =
+                                  user.followers.contains(state.user.id);
+
+                              return GestureDetector(
+                                onTap: () {
+                                  String currentUserId = state.user.id;
+                                  List<String> publisherFollowers =
+                                      user.followers;
+
+                                  if (!publisherFollowers
+                                      .contains(currentUserId)) {
+                                    publisherFollowers.add(currentUserId);
+                                    state.user.following.add(user.id);
+                                    user.followers = publisherFollowers;
+                                    updateUser(user);
+                                    updateUser(state.user);
+                                  } else {
+                                    publisherFollowers.remove(currentUserId);
+                                    state.user.following.remove(user.id);
+                                    user.followers = publisherFollowers;
+                                    updateUser(user);
+                                    updateUser(state.user);
+                                  }
+                                },
+                                child: Container(
+                                  height: 41,
+                                  width: 115,
+                                  decoration: BoxDecoration(
+                                      color: isFollower
+                                          ? theme.info
+                                          : theme.primary,
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: Center(
+                                    child: Text(
+                                      isFollower ? 'Following' : 'Follow',
+                                      style: isFollower
+                                          ? theme.typography.labelMedium
+                                          : theme.typography.titleMedium2,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return const SizedBox.shrink();
+                            }
+                          },
                         ),
                         Image.asset(
                           "assets/images/more.png",

@@ -98,6 +98,18 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     }
   }
 
+  void updateUser(UserModel user) async {
+    try {
+      UserModel? userModel = await authenticationServices.updateUser(user);
+      String? currentUserId = await LoginManager.getUser();
+      if (userModel != null && userModel.id == currentUserId) {
+        emit(Authenticated(user: userModel));
+      }
+    } catch (e) {
+      emit(AuthenticationFailed(errorMessage: e.toString()));
+    }
+  }
+
   void signOut() async {
     emit(Authenticating());
     try {

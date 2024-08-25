@@ -91,15 +91,25 @@ class ProfileCard extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      height: 41,
-                      decoration: BoxDecoration(
-                          color: theme.primary,
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Center(
-                        child: Text(
-                          'Create news',
-                          style: theme.typography.titleMedium2,
+                    GestureDetector(
+                      onTap: () {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: const Text(
+                            'Create news is upcoming feature',
+                          ),
+                          backgroundColor: theme.info,
+                        ));
+                      },
+                      child: Container(
+                        height: 41,
+                        decoration: BoxDecoration(
+                            color: theme.primary,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Center(
+                          child: Text(
+                            'Create news',
+                            style: theme.typography.titleMedium2,
+                          ),
                         ),
                       ),
                     )

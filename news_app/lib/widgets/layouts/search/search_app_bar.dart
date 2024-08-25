@@ -23,34 +23,38 @@ class _SearchAppBarState extends State<SearchAppBar> {
     AppTheme theme = AppTheme.of(context);
     CustomFormComponents formComponents =
         CustomFormComponents(context: context);
-    return Row(
-      children: [
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.white,
-                border: Border.all(color: theme.primary, width: 1)),
-            child: Center(
-              child: Icon(
-                Icons.arrow_back,
-                color: theme.info,
-                size: 24,
+    return Container(
+      padding: const EdgeInsets.all(10),
+      color: Colors.white,
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.white,
+                  border: Border.all(color: theme.primary, width: 1)),
+              child: Center(
+                child: Icon(
+                  Icons.arrow_back,
+                  color: theme.info,
+                  size: 24,
+                ),
               ),
             ),
           ),
-        ),
-        const SizedBox(
-          width: 20,
-        ),
-        Expanded(
-            child: formComponents.buildSearchBar(
-                _searchController, 'Search "News"', false))
-      ],
+          const SizedBox(
+            width: 20,
+          ),
+          Expanded(
+              child: formComponents.buildSearchBar(
+                  _searchController, 'Search "News"', false))
+        ],
+      ),
     );
   }
 }

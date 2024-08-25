@@ -115,6 +115,12 @@ class AuthenticationServices {
     return userModel;
   }
 
+  Future<UserModel?> updateUser(UserModel user) async {
+    await _firestore.collection('users').doc(user.id).update(user.toJson());
+    UserModel? userModel = await getUser(user.id);
+    return userModel;
+  }
+
   Future<void> resetPassword(String email) async {
     await _firebaseAuth.sendPasswordResetEmail(email: email);
   }

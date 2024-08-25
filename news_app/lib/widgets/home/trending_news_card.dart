@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/config/theme/app_theme.dart';
 import 'package:news_app/models/news_model.dart';
@@ -19,12 +20,7 @@ class _TrendingNewsCardState extends State<TrendingNewsCard> {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = AppTheme.of(context);
-    AuthenticationServices auth = AuthenticationServices();
     String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
-
-    Future<UserModel?> getUserModel(String id) async {
-      return await auth.getUser(id);
-    }
 
     return Stack(
       children: [
@@ -60,8 +56,11 @@ class _TrendingNewsCardState extends State<TrendingNewsCard> {
                     const SizedBox(
                       height: 15,
                     ),
-                    FutureBuilder<UserModel?>(
-                      future: getUserModel(widget.news.author),
+                    StreamBuilder<DocumentSnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(widget.news.author)
+                          .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -70,67 +69,61 @@ class _TrendingNewsCardState extends State<TrendingNewsCard> {
                         } else if (snapshot.hasError) {
                           return Text('Error: ${snapshot.error}');
                         } else if (snapshot.hasData) {
-                          final user = snapshot.data;
-                          return user != null
-                              ? Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                          UserModel user = UserModel.fromJson(
+                              snapshot.data!.data() as Map<String, dynamic>);
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        ProfilesDetailScreen(user: user),
+                                  ));
+                                },
+                                child: Row(
                                   children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.of(context)
-                                            .push(MaterialPageRoute(
-                                          builder: (context) =>
-                                              ProfilesDetailScreen(user: user),
-                                        ));
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            width: 25,
-                                            height: 25,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              image: DecorationImage(
-                                                image: user.photo == null
-                                                    ? const AssetImage(
-                                                        'assets/images/megaphone.png')
-                                                    : CachedNetworkImageProvider(
-                                                        user.photo!),
-                                                fit: BoxFit
-                                                    .cover, // This ensures the image fits the box properly
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                            '${user.username.toUpperCase()} News',
-                                            style: theme.typography.titleSmall2,
-                                          ),
-                                          user.isVerfied
-                                              ? Image.asset(
-                                                  'assets/images/verify.png',
-                                                  width: 18,
-                                                  height: 18,
-                                                  color: theme.secondaryText,
-                                                )
-                                              : const SizedBox.shrink()
-                                        ],
+                                    Container(
+                                      width: 25,
+                                      height: 25,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4),
+                                        image: DecorationImage(
+                                          image: user.photo == null
+                                              ? const AssetImage(
+                                                  'assets/images/megaphone.png')
+                                              : CachedNetworkImageProvider(
+                                                  user.photo!),
+                                          fit: BoxFit
+                                              .cover, // This ensures the image fits the box properly
+                                        ),
                                       ),
                                     ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
                                     Text(
-                                      StaticUtils.formatDate(
-                                          widget.news.createdDate),
+                                      '${user.username.toUpperCase()} News',
                                       style: theme.typography.titleSmall2,
-                                    )
+                                    ),
+                                    user.isVerfied
+                                        ? Image.asset(
+                                            'assets/images/verify.png',
+                                            width: 18,
+                                            height: 18,
+                                            color: theme.secondaryText,
+                                          )
+                                        : const SizedBox.shrink()
                                   ],
-                                )
-                              : const Text('User not found');
+                                ),
+                              ),
+                              Text(
+                                StaticUtils.formatDate(widget.news.createdDate),
+                                style: theme.typography.titleSmall2,
+                              )
+                            ],
+                          );
                         } else {
-                          // If the snapshot has no data, this will handle any null cases
                           return const Text('No user data available');
                         }
                       },

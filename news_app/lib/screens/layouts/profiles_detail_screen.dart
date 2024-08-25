@@ -5,6 +5,7 @@ import 'package:news_app/controllers/news/news_cubit.dart';
 import 'package:news_app/controllers/news/news_state.dart';
 import 'package:news_app/models/news_model.dart';
 import 'package:news_app/models/user_model.dart';
+import 'package:news_app/services/authentication_services.dart';
 import 'package:news_app/utils/static_utils.dart';
 import 'package:news_app/widgets/layouts/profiles_detail/agent_news.dart';
 import 'package:news_app/widgets/layouts/profiles_detail/profile_bio_card.dart';
@@ -23,6 +24,7 @@ class _ProfilesDetailScreenState extends State<ProfilesDetailScreen> {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = AppTheme.of(context);
+
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(

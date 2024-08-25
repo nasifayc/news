@@ -59,7 +59,7 @@ class _LandingPageState extends State<LandingPage> {
           ),
           GButton(
             icon: Icons.bookmark, // Bookmark icon
-            text: 'Bookmark',
+            text: 'Bookmarks',
           ),
           GButton(
             icon: Icons.person, // Profile icon

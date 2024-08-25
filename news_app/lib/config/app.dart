@@ -9,6 +9,7 @@ import 'package:news_app/models/user_model.dart';
 import 'package:news_app/screens/layouts/search_page.dart';
 import 'package:news_app/screens/layouts/sign_in_screen.dart';
 import 'package:news_app/screens/layouts/sign_up_screen.dart';
+import 'package:news_app/screens/onboarding_screen.dart';
 import 'package:news_app/services/authentication_services.dart';
 import 'package:news_app/services/news_services.dart';
 
@@ -65,6 +66,7 @@ class _AppState extends State<App> {
           '/sign_in': (context) => const SignInScreen(),
           '/sign_up': (context) => const SignUpScreen(),
           '/search': (context) => const SearchPage(),
+          '/onboarding': (context) => const OnboardingScreen(),
         },
         home: const AppNavigator(),
       ),

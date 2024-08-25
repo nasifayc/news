@@ -15,24 +15,31 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SafeArea(
-          child: SingleChildScrollView(
-              child: Padding(
-        padding: EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SearchAppBar(),
-            SizedBox(
-              height: 20,
-            ),
-            FilterCard(),
-            SizedBox(
-              height: 20,
-            ),
-            SearchedNews(),
-          ],
-        ),
-      ))),
+          child: Stack(children: [
+        SingleChildScrollView(
+            child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 60),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              FilterCard(),
+              SizedBox(
+                height: 20,
+              ),
+              SearchedNews(),
+            ],
+          ),
+        )),
+        Positioned(
+          left: 0,
+          top: 0,
+          right: 0,
+          child: SearchAppBar(),
+        )
+      ])),
     );
   }
 }

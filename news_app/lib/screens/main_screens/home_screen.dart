@@ -23,39 +23,46 @@ class _HomeScreenState extends State<HomeScreen> {
         onRefresh: () async {
           return context.read<NewsCubit>().fetchAllNews();
         },
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const HomeAppBar(),
-                const SizedBox(height: 30),
-                const WelcomeCard(),
-                const SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Trending news',
-                      style: theme.typography.titleMedium2,
-                    ),
-                    Text('See all', style: theme.typography.titleSmall2)
-                  ],
-                ),
-                const SizedBox(height: 20),
-                const TrendingNews(),
-                const SizedBox(height: 20),
-                Text(
-                  'Recommendation',
-                  style: theme.typography.titleMedium2,
-                ),
-                const SizedBox(height: 20),
-                const RecommendationNews()
-              ],
+        child: Stack(children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10, top: 60),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 30),
+                  const WelcomeCard(),
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Trending news',
+                        style: theme.typography.titleMedium2,
+                      ),
+                      Text('See all', style: theme.typography.titleSmall2)
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  const TrendingNews(),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Recommendation',
+                    style: theme.typography.titleMedium2,
+                  ),
+                  const SizedBox(height: 20),
+                  const RecommendationNews()
+                ],
+              ),
             ),
           ),
-        ),
+          const Positioned(
+            left: 0,
+            right: 0,
+            top: 0,
+            child: HomeAppBar(),
+          )
+        ]),
       ),
     );
   }
