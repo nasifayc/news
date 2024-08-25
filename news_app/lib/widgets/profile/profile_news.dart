@@ -26,22 +26,24 @@ class ProfileNews extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Row(
-          children: [
-            Expanded(
-                child: Text('Sort By: ', style: theme.typography.titleSmall)),
-            Expanded(
-              child: formComponents.buildDropdownInputField(
-                  null,
-                  [
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.4,
+          child: Row(
+            children: [
+              Text('Sort By: ', style: theme.typography.titleSmall),
+              Expanded(
+                child: formComponents.buildDropdownInputField(
+                    null,
+                    [
+                      'Newest',
+                      'Oldest',
+                      'Popular',
+                    ],
                     'Newest',
-                    'Oldest',
-                    'Popular',
-                  ],
-                  'Newest',
-                  (value) {}),
-            )
-          ],
+                    (value) {}),
+              )
+            ],
+          ),
         ),
         const SizedBox(
           height: 10,

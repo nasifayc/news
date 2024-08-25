@@ -38,12 +38,12 @@ final class SearchInitial extends SearchState {
 
 // ignore: must_be_immutable
 final class SearchWithFilter extends SearchState {
-  String? date;
+  String date;
   final List<String> category;
   final List<String> location;
 
   SearchWithFilter(
-      {this.date, this.category = const [], this.location = const []});
+      {this.date = '', this.category = const [], this.location = const []});
 
   @override
   List<Object> get props => [super.props, date!, category, location];

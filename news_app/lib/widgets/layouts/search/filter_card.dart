@@ -38,31 +38,17 @@ class _FilterCardState extends State<FilterCard> {
 
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
-        if (state is SearchInitial) {
-          return GestureDetector(
-              onTap: showFilterPage,
-              child: Container(
-                height: 39,
-                width: 102,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: theme.secondaryText.withOpacity(0.2)),
-                child: Center(
-                    child: Text(
-                  'Add Filter',
-                  style: TextStyle(
-                      color: theme.secondaryText,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                )),
-              ));
-        } else if (state is SearchWithFilter) {
+        if (state is SearchWithFilter) {
           final List<String> allFilters = [
-            state.date!,
             ...state.category,
             ...state.location
           ];
+          if (state.date.isNotEmpty || state.date != '') {
+            allFilters.insert(0, state.date);
+          }
+
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Wrap(
                 spacing: 8.0,

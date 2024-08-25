@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +19,7 @@ class AddFilterSheet extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         child: BlocBuilder<SearchCubit, SearchState>(
           builder: (context, state) {
-            String? date = state is SearchWithFilter ? state.date : null;
+            String date = state is SearchWithFilter ? state.date : '';
             List<String> categories = state is SearchWithFilter
                 ? List<String>.from(state.category)
                 : [];
@@ -63,7 +63,7 @@ class AddFilterSheet extends StatelessWidget {
                         onChanged: (value) {
                           context
                               .read<SearchCubit>()
-                              .searchWithFilter(value, categories, location);
+                              .searchWithFilter(value!, categories, location);
                         },
                       );
                     },
@@ -83,6 +83,7 @@ class AddFilterSheet extends StatelessWidget {
                     final category = state.categoryFilters[index];
                     return GestureDetector(
                       onTap: () {
+                        // log(state.toString());
                         if (categories.contains(category)) {
                           categories.remove(category);
                         } else {
@@ -124,6 +125,7 @@ class AddFilterSheet extends StatelessWidget {
                     final loc = state.locationFilters[index];
                     return GestureDetector(
                       onTap: () {
+                        // log(state.toString());
                         if (location.contains(loc)) {
                           location.remove(loc);
                         } else {
@@ -157,6 +159,9 @@ class AddFilterSheet extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
+                          date = '';
+                          categories.clear();
+                          location.clear();
                           context.read<SearchCubit>().removeAllFilters();
                         },
                         child: Container(

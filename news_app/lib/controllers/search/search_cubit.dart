@@ -2,9 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/controllers/search/search_state.dart';
 
 class SearchCubit extends Cubit<SearchState> {
-  SearchCubit() : super(SearchInitial());
+  SearchCubit() : super(SearchWithFilter());
 
-  void searchWithFilter(String? dateFilter, List<String> categoryFilter,
+  void searchWithFilter(String dateFilter, List<String> categoryFilter,
       List<String> locationFilter) {
     // if (dateFilter == null ||
     //     categoryFilter.isEmpty ||
@@ -18,6 +18,7 @@ class SearchCubit extends Cubit<SearchState> {
 
   void removeAllFilters() {
     emit(SearchInitial());
+    emit(SearchWithFilter());
   }
 
   void toggleDate(String date) {

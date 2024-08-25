@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/controllers/search/search_cubit.dart';
-import 'package:news_app/controllers/search/search_state.dart';
 import 'package:news_app/widgets/layouts/search/filter_card.dart';
 import 'package:news_app/widgets/layouts/search/search_app_bar.dart';
+import 'package:news_app/widgets/layouts/search/searched_news.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -28,6 +26,10 @@ class _SearchPageState extends State<SearchPage> {
               height: 20,
             ),
             FilterCard(),
+            SizedBox(
+              height: 20,
+            ),
+            SearchedNews(),
           ],
         ),
       ))),
