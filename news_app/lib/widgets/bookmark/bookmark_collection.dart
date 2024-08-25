@@ -73,16 +73,14 @@ class _BookmarkCollectionState extends State<BookmarkCollection> {
                   image2 = StaticUtils.defaultImageUrl;
                   image3 = StaticUtils.defaultImageUrl;
                 }
+                List<NewsModel> filterdNews = [];
+                for (var news in state.allNews) {
+                  if (news.category == category) {
+                    filterdNews.add(news);
+                  }
+                }
                 return GestureDetector(
                   onTap: () {
-                    List<NewsModel> filterdNews = [];
-                    for (var news in state.allNews) {
-                      if (news.category == category) {
-                        log("New catgory: ${news.category} -------------- Catogory: $category");
-                        filterdNews.add(news);
-                      }
-                    }
-
                     log(filterdNews.length.toString());
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) =>
@@ -142,6 +140,13 @@ class _BookmarkCollectionState extends State<BookmarkCollection> {
                       Text(
                         StaticUtils.capitalize(catogries[index]),
                         style: theme.typography.titleMedium2,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "${filterdNews.length} News",
+                        style: theme.typography.titleSmall2,
                       )
                     ],
                   ),

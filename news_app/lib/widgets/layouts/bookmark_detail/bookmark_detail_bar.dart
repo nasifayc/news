@@ -39,20 +39,6 @@ class BookmarkDetailBar extends StatelessWidget {
             category,
             style: theme.typography.titleLarge2,
           ),
-          const Spacer(),
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Colors.white,
-                border: Border.all(color: theme.primary, width: 1)),
-            child: Center(
-                child: Image.asset(
-              "assets/images/more.png",
-              width: 24,
-              height: 24,
-            )),
-          ),
         ],
       ),
     );
