@@ -7,7 +7,7 @@ import 'package:news_app/controllers/authentication/authentication_cubit.dart';
 import 'package:news_app/controllers/authentication/authentication_state.dart';
 import 'package:news_app/models/user_model.dart';
 import 'package:news_app/screens/layouts/profiles_detail_screen.dart';
-import 'package:news_app/services/authentication_services.dart';
+
 import 'package:news_app/utils/static_utils.dart';
 
 class PublisherCard extends StatefulWidget {

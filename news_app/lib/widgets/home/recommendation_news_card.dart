@@ -162,6 +162,9 @@ class _RecommendationNewsCardState extends State<RecommendationNewsCard> {
                             }
                           },
                         ),
+                        const SizedBox(
+                          width: 10,
+                        ),
                         Image.asset(
                           "assets/images/more.png",
                           width: 24,
