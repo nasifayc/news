@@ -34,6 +34,7 @@ class _TrendingNewsCardState extends State<TrendingNewsCard> {
               borderRadius: BorderRadius.circular(10)),
           width: MediaQuery.of(context).size.width * 0.7,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 height: MediaQuery.of(context).size.height * 0.2,
@@ -46,6 +47,7 @@ class _TrendingNewsCardState extends State<TrendingNewsCard> {
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
                       height: 10,

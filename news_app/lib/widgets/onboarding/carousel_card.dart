@@ -42,7 +42,7 @@ class _CarouselCardState extends State<CarouselCard> {
           options: CarouselOptions(
             autoPlay: true,
             enlargeCenterPage: true,
-            aspectRatio: 1.1,
+            aspectRatio: 1.3,
             pauseAutoPlayOnTouch: true,
             autoPlayCurve: Curves.fastOutSlowIn,
             autoPlayAnimationDuration: const Duration(seconds: 2),

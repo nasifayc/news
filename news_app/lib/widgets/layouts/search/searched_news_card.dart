@@ -36,6 +36,7 @@ class SearchedNewsCard extends StatelessWidget {
         ),
         Expanded(
             child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               newsModel.title,

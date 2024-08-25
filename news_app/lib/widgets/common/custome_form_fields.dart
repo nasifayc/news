@@ -15,7 +15,10 @@ class CustomFormComponents {
       readOnly: isReadOnly,
       decoration: InputDecoration(
         hintText: hintText,
-        prefixIcon: const Icon(Icons.search),
+        prefixIcon: Icon(
+          Icons.search,
+          color: theme.info,
+        ),
         filled: true,
         fillColor: theme.inputFieldBackground,
         border: OutlineInputBorder(
