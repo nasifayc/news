@@ -78,6 +78,12 @@ class _SignInFormState extends State<SignInForm> {
             height: 10,
           ),
           GestureDetector(
+            onTap: () {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: const Text('Upcoming feature!'),
+                backgroundColor: theme.info,
+              ));
+            },
             child: Align(
               alignment: Alignment.centerRight,
               child: Text(
@@ -161,7 +167,11 @@ class _SignInFormState extends State<SignInForm> {
           ),
           SecondaryButton(
             onPressed: () {
-              context.read<AuthenticationCubit>().signInWithFacebook();
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: const Text('Upcoming feature!'),
+                backgroundColor: theme.info,
+              ));
+              // context.read<AuthenticationCubit>().signInWithFacebook();
             },
             prefix: Image.asset(
               "assets/images/facebook.png",
