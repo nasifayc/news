@@ -60,6 +60,7 @@ class _AppState extends State<App> {
         )
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'News',
         theme: LightModeTheme().themeData,
         routes: {
