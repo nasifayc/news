@@ -72,7 +72,7 @@ class SearchedNews extends StatelessWidget {
                             style: theme.typography.titleSmall2,
                           ),
                           SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.4,
+                            width: MediaQuery.of(context).size.width * 0.5,
                             child: Row(
                               children: [
                                 Text('Sort By: ',
